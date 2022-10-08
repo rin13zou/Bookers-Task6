@@ -1,0 +1,13 @@
+<% if book.comments.present? %>
+  <p>コメント件数：<%= book.comments.count %></p>
+  <% book.comments.each do |comment| %>
+    <%= comment.user.name %>
+    <% if comment.user == current_user %>
+      <div class="comment-delete">
+        <%= link_to "削除", _comment_path(comment.post, comment), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>コメントはまだありません</p>
+<% end %>
